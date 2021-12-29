@@ -11,4 +11,4 @@
 |Workload characterization and prediction in the cloud: A multiple time series approach|Hidden Markov Model|distinguish the temporal correlations in obtained clusters of VMs||
 |A workload analysis of live event broadcast service in cloud|Regression techniques|the approach is based on simple statistical models that might not capture the patterns in more complex data||
 |Workload characterization and prediction in the cloud: A multiple time series approach|multiple time series approch|The model does a grouping of similar applications's need in order to improve the accuracy of predictions||
-||||
+|**machine learning methods**|||

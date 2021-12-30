@@ -41,6 +41,8 @@ SaaS业务实际上通常是变化多端的
 
 >"Roy et al. [13] apply the ARMA model for workload prediction in Clouds with the goal of minimizing cost," ([Calheiros et al 2015:451](zotero://open-pdf/library/items/MW2JR4ED?page=3))
 
+>"Sladescu et al. [7] successfully utilized artificial neural networks to predict workloads bursts in auction websites." ([Calheiros et al 2015:455](zotero://open-pdf/library/items/MW2JR4ED?page=7))
+
 ## System And Application Models
 
 这一节主要是描述了研究要解决的问题模型，包括一些业务的情况说明，可以看出来，真实的业务场景是非常复杂的，有的时候物理机器会由第三方来提供，SaaS服务由提供商作为中间层，提供带有保障的服务给用户。
@@ -69,44 +71,58 @@ SaaS业务实际上通常是变化多端的
 
 >"Analyzer Generates an estimation of future demand for the application." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"a queueing model can be built for each application offered to end users as a service." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+>"a queueing model can be built for each application offered to end users as a service." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"ARIMA has been chosen for the implementation of our module because the underlying workload fits well in the model:" ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+用户的请求可以看作是一个队列模型，为每一个应用维护一个队列用来处理用户的请求
 
-"the historical workload data is fed into the Workload Analyzer, where it fits the ARIMA model on them." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+>"the historical workload data is fed into the Workload Analyzer, where it fits the ARIMA model on them." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"with one time-interval in advance" ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+执行起始的时候，历史数据会被送入*Workload Analyzer*，首先去 fits ARIMA模型，当整个系统运行起来的时候，*Workload Analyzer*会提供**提前一个时间区间**的预测值
 
-"It is implemented Control so that at the next prediction cycle, the actual number of requests (obtained from the original dataset) is added to the time series used in prediction while discarding the oldest value." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+>"It is implemented as a **cyclic buffer** so that at the next prediction cycle, the actual number of requests (obtained from the original dataset) is added to the time series used in prediction while discarding the oldest value." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"initiated based on the Box-Jenkins method" ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+利用一个环形的buffer来具体实现的，当下一次预测周期来临时，实际的请求数会被放入时序数据中用以预测同时会舍弃掉最老的数据（环形队列）
 
-"This transformation is achieved by differencing the original time series. The number of times the original time series has to be differenced until it becomes stationary constitutes the d parameter of the ARI M A(p; d; q) model." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+>"At runtime, the model is constantly updated: whenever new requests arrive, they are incorporated to the time series and older data is removed from the time series in the same amount." ([Calheiros et al 2015:454](zotero://open-pdf/library/items/MW2JR4ED?page=6))
 
-"The values of q and p are determined by analyzing the autocorrelation and partial autocorrelation plots of the historical data, respectively. In the context of this work, historical data means the observed number of requests per second received by the system in some past time interval." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+### ARIMA algorithm and its paramester
 
-"The autocorrelation plot is used to determine how random a dataset is." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+>"the process of ﬁtting the ARIMA model is initiated based on the [[Box-Jenkins method]]" ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"Using the above method to determine the terms p, d, and q of the ARIMA model, the historical workload information is fit to the model to be used for prediction of future workload values." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>According to this method, the time series must be transformed into a [[stationary time series]], that is, for each ($X_t$ , $X_{t+τ}$ ), τ being the time difference (lag) between two data points, the mean and variance of the process must be constant and independent of t. In addition, the auto-covariance between $X_t$  and $X_{t+τ}$  should be affected only by τ.
 
-"The length of this buffer, which corresponds to the number of time intervals in past affecting the current prediction value, is configured at the start of the system based on characteristics of the application workload (number of received requests per second)." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>"This transformation is achieved by differencing the original time series. The number of times the original time series has to be differenced until it becomes stationary constitutes the d parameter of the ARI M A(p; d; q) model." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"It accepts a time series from the ARIMAWorkloadAnalizer and prepares it for submission to the statistic engine, where ARIMA model is fitted on them." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>"The values of q and p are determined by analyzing the [[autocorrelation]] and [[partial autocorrelation plots]] of the historical data, respectively. In the context of this work, historical data means the observed number of requests per second received by the system in some past time interval." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
 
-"We adopted the fitting process from R, which implements the Hyndman-Khandakar algorithm [20]." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>"**The autocorrelation plot** is used to determine how random a dataset is." ([Calheiros et al 2015:452](zotero://open-pdf/library/items/MW2JR4ED?page=4))
+> In the case of random data, the autocorrelation values approach zero for all time-lagged values, otherwise, one or more autocorrelation values approach 1 or -1. In the autocorrelation plot, the horizontal axis represents the time lags. Values on the vertical axis are calculated using the autocorrelation coefﬁcient $R_h$ :
 
-"(i) determination of the number of differencing steps of the model (parameter d); (ii) actual differentiation of the time series d times; and (iii) selection of the best fit model." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+$$R_h = C_h/C_0$$
+$$C_{h}=\frac{1}{N} \sum_{t=1}^{N-\tau}\left(X_{t}-\bar{X}\right)\left(X_{t+\tau}-\bar{X}\right)$$
+$$C_{h}=\frac{1}{N} \sum_{t=1}^{N}\left(X_{t}-\bar{X}\right)^2$$
 
-"The method used by R for the first stage applies successive Kwiatkowski-Phillips-Schmidt-Shin (KPSS) tests [22] to determine d." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>"Using the above method to determine the terms p, d, and q of the ARIMA model, the historical workload information is fit to the model to be used for prediction of future workload values." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
 
-"Because the propose method predicts one time interval ahead, it has complexity O(p), where p is the order of the autoregressive component of the ARIMA model." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+>"The length of this buffer, which corresponds to the number of time intervals in past affecting the current prediction value, is configured at the start of the system based on characteristics of the application workload (number of received requests per second)." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
 
-"1-hour intervals" ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+buffer的长度（通常代表能够影响预测值的时间区间个数），将由负载的特征决定，即可以根据负载的特征进行调整
 
-"At runtime, the model is constantly updated: whenever new requests arrive, they are incorporated to the time series and older data is removed from the time series in the same amount." ([Calheiros et al 2015:454](zotero://open-pdf/library/items/MW2JR4ED?page=6))
+>"The particularities of the workload is one factor to be considered when selecting a prediction technique, as different techniques can present different performance depending on the characteristic of each workload." ([Calheiros et al 2015:455](zotero://open-pdf/library/items/MW2JR4ED?page=7))
 
-"Pa The accuracy of the prediction is evaluated using varl ious error metrics." ([Calheiros et al 2015:454](zotero://open-pdf/library/items/MW2JR4ED?page=6))
+许多研究也表明，根据不同的负载特征采用不同的预测技术是有效的
 
-"The particularities of the workload is one factor to be considered when selecting a prediction technique, as different techniques can present different performance depending on the characteristic of each workload." ([Calheiros et al 2015:455](zotero://open-pdf/library/items/MW2JR4ED?page=7))
+>"It(a statistic backend based on R package) accepts a time series from the ARIMAW Workload Analizer and prepares it for submission to the statistic engine, where ARIMA model is fitted on them." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
 
-"Sladescu et al. [7] successfully utilized artificial neural networks to predict workloads bursts in auction websites." ([Calheiros et al 2015:455](zotero://open-pdf/library/items/MW2JR4ED?page=7))
+>"We adopted the fitting process from R, which implements the **Hyndman-Khandakar algorithm** [20]." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+
+- determination of the number of differencing steps of the model (parameter d)
+- actual differentiation of the time series d times;
+- selection of the best fit model." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+
+>"The method used by R for the first stage applies successive Kwiatkowski-Phillips-Schmidt-Shin (KPSS) tests [22] to determine d." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+
+>"Because the propose method predicts one time interval ahead, it has complexity O(p), where p is the order of the [[autoregressive component]] of the ARIMA model." ([Calheiros et al 2015:453](zotero://open-pdf/library/items/MW2JR4ED?page=5))
+
+>"The accuracy of the prediction is evaluated using various error metrics." ([Calheiros et al 2015:454](zotero://open-pdf/library/items/MW2JR4ED?page=6))
+

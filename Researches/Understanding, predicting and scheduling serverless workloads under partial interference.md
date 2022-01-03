@@ -111,28 +111,43 @@ ___
 
 ### profiling
 
+
 >"We adopt a non-intrusive method that only monitors the system-layer and microarchitecture-layer metrics of the application" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
 >"In the system layer, we collect not only the configurations of resource allocation but also their actual utilization ratios, including the number of CPU cores, memory, network, memory bandwidth, and disk I/O." ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
 >"we record the instruction executionrelated measures of the CPU, which represent the execution status of the workload." ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
-"the 99th percentile latency has a strong correlation with the IPC after the knee but varies significantly before that." ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
+___
 
-"Pearson Correlation Coefficient" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
+![[Pasted image 20220103215951.png]]
 
-"Spearman Correlation Coefficient" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
+>"the 99th percentile latency has a strong correlation with the IPC after the knee but varies significantly before that." ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
-"The larger each coefficient is, the more the metrics are correlated with the ng" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
+这表明一个良好训练的IPC预测模型在“keen”之后尾延时预测预测也会有高的准确性
 
-"we first prepare a small dataset of workload metrics and their corun QoS." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+![[Pasted image 20220103220125.png]]
 
-"We design a regression model (denoted by 푅푀 ), which can predict the QoS of an arbitrary number of colocated workloads under partial interference." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+>"Pearson Correlation Coefficient" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
-"The start delay vector (퐷퐴, 퐷 퐵 , 퐷퐶 , ...) codes the time overlap among workloads." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+>"Spearman Correlation Coefficient" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
 
-"푖 푆 푖 푆 푖 푆n the system, and 푢푘푙 (1 ≤ 푙 ≤ 푆 , 1 ≤ 푘 ≤ 16) represents the 푘 th metric collected for 푖 's function on server 푙 ." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+>"The larger each coefficient is, the more the metrics are correlated with the ng" ([Zhao et al 2021:6](zotero://open-pdf/library/items/XCRAAQS7?page=6))
+
+___
+>"we first prepare a small dataset of workload metrics and their corun QoS." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+
+>"We design a regression model (denoted by 푅푀 ), which can predict the QoS of an arbitrary number of colocated workloads under partial interference." ([Zhao et al 2021:7](zotero://open-pdf/library/items/XCRAAQS7?page=7))
+
+The model for predicting application A's performance under the interference of $B, C, ...(i.e., P_{A\cup\{B,C,...\}})$ is described as follows:
+
+![[Pasted image 20220103220309.png]]
+
 
 "Hence, we choose the traditional ML approach, particularly Incremental RFR (IRFR), to build our model," ([Zhao et al 2021:8](zotero://open-pdf/library/items/XCRAAQS7?page=8))
 
-"This mechanism is activated whenever a new workload is submitted or a previously submitted workload scales beyond the current function instances." ([Zhao et al 2021:8](zotero://open-pdf/library/items/XCRAAQS7?page=8))
+本论文所用的回归方法是**IRFR算法**
+
+>"This mechanism is activated whenever a new workload is submitted or a previously submitted workload scales beyond the current function instances." ([Zhao et al 2021:8](zotero://open-pdf/library/items/XCRAAQS7?page=8)
+
+无论是新的workload到来还是先前的workload变化该方法都是有效的

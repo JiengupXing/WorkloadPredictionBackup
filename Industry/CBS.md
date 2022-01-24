@@ -70,3 +70,6 @@ CBS运管系统
 	- 游戏场景：高峰时间段，应用程序传递到文件系统，再传递到块设备的IO请求都为随机小IO（4KB/8KB/16KB不等），峰值需求超过2万IOPS
 - 持续高顺序读写
 	- 典型的Spark-HDFS离线数据分析框架，对于磁盘的读写。RDD read/write，shuffle write都是顺序IO
+
+### 云硬盘生命周期
+![[Pasted image 20220124161433.png]]

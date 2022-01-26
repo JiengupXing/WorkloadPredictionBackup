@@ -17,3 +17,4 @@
 - beyound erasure coding(EC)
 - small-write-intensive
 - speculative partial write scheme(fast small write)
+

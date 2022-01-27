@@ -18,3 +18,15 @@
 - small-write-intensive
 - speculative partial write scheme(fast small write)
 
+## 4. A3C-DO: A Regional Resource Scheduling Framework Based on Deep Reinforcement Learning in Edge(HUST)
+[A3C-DO: A Regional Resource Scheduling Framework Based on Deep Reinforcement Learning in Edge ](https://ieeexplore.ieee.org/document/9066896)
+- propose a double offloading framework to simulate
+- formulate the offloading as a Markov Decision process
+- RL to make offloading decision
+
+## 5.Detection of SLA Violation for Big Data Analytics Applications in Cloud(澳大利亚政府和学校合作 Alibaba dataset)
+[Detection of SLA Violation for Big Data Analytics Applications in Cloud](https://ieeexplore.ieee.org/document/9097404)
+- SLA violation detection
+- predict and prevent SLA violation
+- main on **hosted big data analytics applications(BDAAs)**
+

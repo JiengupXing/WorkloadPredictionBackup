@@ -18,3 +18,6 @@
 - small-write-intensive
 - speculative partial write scheme(fast small write)
 
+
+
+

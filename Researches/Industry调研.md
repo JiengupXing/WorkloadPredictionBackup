@@ -37,3 +37,16 @@
 - implement a mechanism called dynamic deduplication regulation (DDR) to adjust the deduplication behavior during runtime.
 - balancing the client-perceived IO performance and the self-perceived space cost is always one of the standing challenges.
 
+## 7.A Bifactor Approximation Algorithm for Cloudlet Placement in Edge Computing
+[A Bifactor Approximation Algorithm for Cloudlet Placement in Edge Computing](https://ieeexplore.ieee.org/document/9609538)
+- placement
+- guarantee a bounded latency and placement cost
+- New York City OpenData
+
+## 8.Adaptive Resource Efficient Microservice Deployment in Cloud-Edge Continuum
+[Adaptive Resource Efficient Microservice Deployment in Cloud-Edge Continuum](https://ieeexplore.ieee.org/document/9615028)
+- violation of QoS
+- RL based
+- resource allocation
+
+## 

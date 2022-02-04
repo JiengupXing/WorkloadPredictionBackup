@@ -49,4 +49,15 @@
 - RL based
 - resource allocation
 
-## 
+## 9. Customer Adaptive Resource Provisioning for Long-Term Cloud Profit Maximization under Constrained Budget
+[Customer Adaptive Resource Provisioning for Long-Term Cloud Profit Maximization under Constrained Budget](https://ieeexplore.ieee.org/document/9537613)
+- resource provisioning strategies
+- four customer types (i.e., loyal, old, new, and lost)
+- Long-Term Cloud
+- under Constrained
+
+## 10. Performance and Cost-Efficient Spark Job Scheduling Based on Deep Reinforcement Learning in Cloud Computing Environments
+[Performance and Cost-Efficient Spark Job Scheduling Based on Deep Reinforcement Learning in Cloud Computing Environments](https://ieeexplore.ieee.org/document/9599497)
+- Reinforcement Learning
+- accommodate the SLA objectives
+

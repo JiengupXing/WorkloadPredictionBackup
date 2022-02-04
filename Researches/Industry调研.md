@@ -30,3 +30,10 @@
 - predict and prevent SLA violation
 - main on **hosted big data analytics applications(BDAAs)**
 
+## 6.MUSE: A Multi-Tierd and SLA-Driven Deduplication Framework for Cloud Storage Systems
+[MUSE: A Multi-Tierd and SLA-Driven Deduplication Framework for Cloud Storage Systems](https://ieeexplore.ieee.org/document/9099031)
+- Deduplication
+- Cloud Storage System
+- implement a mechanism called dynamic deduplication regulation (DDR) to adjust the deduplication behavior during runtime.
+- balancing the client-perceived IO performance and the self-perceived space cost is always one of the standing challenges.
+

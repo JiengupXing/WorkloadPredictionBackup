@@ -74,3 +74,15 @@
 - under a user-specified Budget Constraint
 - a well-known microservice benchmark
 
+## 13. Workload-Adaptive Configuration Tuning for Hierarchical Cloud Schedulers
+[Workload-Adaptive Configuration Tuning for Hierarchical Cloud Schedulers](https://ieeexplore.ieee.org/document/8741093)
+- configuration tuning
+- dynamic cloud workloads
+- resource allocation mechanism
+
+## 14. GRP-HEFT: A Budget-Constrained Resource Provisioning Scheme for Workflow Scheduling in IaaS Clouds
+[GRP-HEFT: A Budget-Constrained Resource Provisioning Scheme for Workflow Scheduling in IaaS Clouds](https://ieeexplore.ieee.org/document/8937813)
+- budget constrained
+- resource provisioning
+- workflow scheduling
+

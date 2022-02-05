@@ -61,3 +61,9 @@
 - Reinforcement Learning
 - accommodate the SLA objectives
 
+## 11. Towards Accurate Prediction for High-Dimensional and Highly-Variable Cloud Workloads with Deep Learning
+[Towards Accurate Prediction for High-Dimensional and Highly-Variable Cloud Workloads with Deep Learning](https://ieeexplore.ieee.org/document/8902077)
+- RNN based
+- workload prediction
+- solution for high-dimensional and highly-variable workloads
+

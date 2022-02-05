@@ -67,3 +67,10 @@
 - workload prediction
 - solution for high-dimensional and highly-variable workloads
 
+## 12. Performance Modeling and Workflow Scheduling of Microservice-Based Applications in Clouds
+[Performance Modeling and Workflow Scheduling of Microservice-Based Applications in Clouds](https://ieeexplore.ieee.org/document/8651324)
+- microservice
+- performance prediction
+- under a user-specified Budget Constraint
+- a well-known microservice benchmark
+
